@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8" />
     <title>Intro SE331</title>
-    <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
-    <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-
 <body>
-    <div id="app">
-        <h1>Product goes here</h1>
+<div id="app">
+    <div class="nav-bar">
+        <h2>Vue.js Shop</h2>
     </div>
+    <div class="cart">
+        <p v-if="totalItems === 0">No items in cart</p>
+        <div v-else>
+            <p>Total Items: {{ totalItems }}</p>
+            <div class="cart-item" v-for="(quantity, productId) in cart" :key="productId">
+                Product ID: {{ productId }}, Quantity: {{ quantity }}
+                <button @click="removeFromCart(productId)" class="remove-btn">Remove One</button>
+            </div>
+        </div>
+    </div>
+    <product-display
+            :premium="premium"
+            @add-to-cart="updateCart"
+            @remove-from-cart="removeFromCart">
+    </product-display>
+</div>
 
-    <!-- Import Js -->
-    <script src="./main.js"></script>
+<!-- Import Js -->
+<script src="./components/ProductDetails.js"></script>
+<script src="./components/ProductDisplay.js"></script>
+<script src="./components/ReviewForm.js"></script>
+<script src="./components/ReviewList.js"></script>
+<script src="./main.js"></script>
 </body>
-
 </html>
